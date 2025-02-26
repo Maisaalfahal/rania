@@ -1,0 +1,2953 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Horizontal Navigation Bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+        
+            display: flex;
+            position: sticky;
+            align-items: center;
+            justify-content: space-between;
+            top:9px;
+            background: rgb(255 127 39);
+            background-blend-mode: darken;
+            background-size: cover;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+          
+            
+            margin-right: 20px;
+        }
+
+        .nav-list li a {
+           
+         
+      
+           font-size: 18px;
+           transition: color 0.3s ease-in-out;
+           text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+ 
+        }
+
+        .nav-list li a:hover {
+            color: #ffd700;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+         
+          
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            margin-right: 30px;
+        }
+
+        .logo-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #ffcc66;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #ffcc66, transparent);
+            animation: glow 2s linear infinite;
+        }
+
+        .content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .content h3{
+            border:2px solid #008080;
+           padding: 20px ;
+           border-radius: 50px;
+        }
+
+        .h {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        
+        h1 {
+            color: #ffcc66;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        #books-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .book {
+            width: 200px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(172, 255, 47, 0.336);
+        }
+
+        .book img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 5px 5px 0 0;
+            transition: transform 0.3s;
+        }
+
+        .book img:hover {
+            transform: scale(1.1);
+        }
+
+        .accordion {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-title {
+            padding: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            color:black;
+            transition: background 0.3s;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 15px;
+            background: #f9f9f9;
+        }
+
+        .accordion-content p {
+            padding: 15px 0;
+            margin: 0;
+        }
+
+        .footer {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #search-input {
+            padding: 8px;
+            font-size: 16px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+        }
+
+        #search-button { 
+        background-color: #ffd700;
+            color: #000;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #search-button:hover {
+            background-color: #000;
+            /* Change the background color on hover */
+            color: #ffd700;
+        }
+        
+    #books-section {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    #books-section h2 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+    /**/
+    
+    .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: transparent; 
+            z-index: 1;
+            border-radius: 10px;
+            padding: 10px; 
+            margin-top: 5px; 
+        }
+
+        .dropdown-content ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex; 
+        }
+
+        .dropdown-content li {
+            margin-right: 10px;
+        }
+
+        .dropdown-content li a {
+            display: block; 
+            padding: 15px 20px; 
+            border-radius: 10px;
+            transition: background 0.3s;
+            text-align: center; 
+            border: 2px solid #fff;
+        }
+
+        .dropdown-content li a:hover {
+            background: rgba(0, 0, 0, 0.1); 
+            border: 3px solid rgba(12, 179, 156, 0.2); 
+        }
+
+        .literature { background-color: #ff6347; }
+        .educational { background-color: #6a5acd; }
+        .scientific { background-color: #20b2aa; }
+        .electronic { background-color: #ff69b4; }
+        .other { background-color: #008080; }
+        .religious { background-color: #ff8c00; }
+        .philosophical { background-color: #ffa500; }
+        .personal { background-color: #9370db; }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        main{
+          background: linear-gradient(to bottom, #ff6699, #ffcc66); 
+        }
+       
+        
+        .payment-section {
+            background: #fff; 
+            padding: 20px; 
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); 
+            border-radius: 8px; 
+        
+
+        }
+
+        .payment-section h2 {
+            border-right: 5px dotted red;
+            margin-bottom: 20px; 
+            margin-left: 90vh;
+            color: #ff69b4;
+        }
+
+        .payment-section button {
+            padding: 10px 20px; 
+            margin-right: 10px; 
+            border: none; 
+            background-color: #007bff; 
+            color: white; 
+            cursor: pointer; 
+            border-radius: 5px; 
+           margin-left: 50vh
+            
+        }
+
+        .payment-section button:hover {
+            background-color: #0056b3; 
+        }
+
+        #iframe-container {
+            margin-top: 20px; 
+            border: 1px solid #ccc;
+            border-radius: 5px; 
+            background: #f9f9f9; 
+            height: 1500px; 
+            overflow: hidden; 
+        }
+
+        iframe {
+            width: 100%; 
+            height: 160%; 
+            border: none; 
+            overflow-x: hidden; 
+        }
+      .mor {
+         list-style: none;
+     
+         background-color: transparent;
+        
+         text-align:center;
+      
+    
+        }
+        .mor a{
+            text-decoration: none;
+             font-size: 30px;
+           
+             border:2px solid #008080;
+             padding:  5px 30px ;
+             border-radius: 50px;
+            
+            
+        }
+        
+        .mor a:hover{
+           
+            border:3px solid #008080;
+          
+             
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="contact.html">للتواصل</a></li>
+            <li><a href="sell.html">بيع</a></li>
+            <li><a href="buyer.html">🛒</a></li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropbtn">الكتب</a>
+              <div class="dropdown-content">
+                  <ul>
+                      <li class="literature"><a href="#literature">أدبية</a></li>
+                      <li class="educational"><a href="rw2.html">مدرسية</a></li>
+                      <li class="scientific"><a href="#scientific">علمية</a></li>
+                      <li class="electronic"><a href="#electronic">الكترونية</a></li>
+                      <li class="other"><a href="other.html">أخرى</a></li>
+                      <li class="religious"><a href="#religious">دينية</a></li>
+                      <li class="personal"><a href="#personal">التربية</a></li>
+                      <li class="personal"><a href="#personal">الشخصية</a></li>
+                      <li class="philosophical"><a href="#philosophical">الفلسفية</a></li>
+                  </ul>
+              </div>
+          </li>
+          <li><a href="about.html"> عننا</a></li>
+          <li><a href="home.html">الرئيسيه</a></li>
+       
+        </ul>
+        <div class="rightNav">
+            <input type="text" id="search-input" placeholder="ابحث عن كتاب">
+            <button id="search-button">بحث</button>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-text">Book Shop</div>
+        </div>
+        <h1>Welcome to Our 🛒</h1>
+    </header>
+
+    <div class="h">
+        <h1>Books</h1>
+    </div>
+
+    <section id="books-section">
+        <div id="books-container"></div>
+    </section>
+
+    <main class="content">
+        <h3> سياسه الخصوصيه </h3>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-title">  ✊ الدفع نقدا عند الاستلام  </div>
+                <div class="accordion-content">
+                    <p>  خيار الدفع نقدا عند الاستلام يسمح لك بالدفع نقدا علي عتبة منزلك فور استلام الطلب .وهو متوفر كطريقه دفع للمنتجات 
+                      المشحونه من قبل امازون وبعض المنتجات المشحونه من قبل البائع .لن يكون الدفع النقدي عند الاستلام متاحا لديك كطريقة دفع 
+                      اذا كان لديك شرط واحد علي الاقل لايتوافق مع اهليه الدفع نقدا عند الاستلام.
+                    </p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-title"> 15 يوم للارجاع</div>
+                <div class="accordion-content">
+                    <p> مدة الارجاع 15 يوم بعد التوصيل.</p>
+                    <p> سبب الارجاع :سلعه خاطئه و مفقوده معيبه ضرر مادي اسباب اخري</p>
+                    <p> سياسة الارجاع : استرداد المبلغ بالكامل او التبديل</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-title"> 🚛 توصيل مجاني </div>
+                <div class="accordion-content">
+                    <p>توصيل مجاني على الطلبات فوق مبلغ معين.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-title"> 🛒تشحن من أمازون </div>
+                <div class="accordion-content">
+                    <p>تريد أمازون عملية تسليم هذا المنتج تتوفر خاصية تتبع تسليم الطلب الي عتبة المنزل.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-title"> ✔معاملتك آمنة </div>
+                <div class="accordion-content">
+                    <p>نحن نعمل بجد لحماية أمنك وخصوصيتك يقوم نظام امان الدفع لدينا بتشفير معلوماتك اثنناء نقلها .نحن لا نشارك تفاصيل بطاقة الائتمان الخاصة بك مع البائعين 
+                      الخارجيين ولا نبيع معلوماتك للأخرين.</p>
+                </div>
+            </div>
+           
+            <li class="mor"><a href="./s.html">اكثر</a></li>
+
+        </div>
+        
+
+    </main>
+
+    <div class="payment-section">
+        <h2>طرق الدفع</h2> 
+        <button onclick="loadIframe('slam.html')">الدفع عند الاستلام</button> 
+        <button onclick="loadIframe('Pyment.html')">الدفع ببطاقة الائتمان</button> 
+    </div>
+
+    <div id="iframe-container">
+        <iframe id="content" src="" frameborder="0"></iframe> 
+    </div>
+
+
+    <footer class="footer">
+        <p>&copy; 2025 Your Company Name</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const titles = document.querySelectorAll('.accordion-title');
+            titles.forEach(title => {
+                title.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    const isOpen = content.style.maxHeight;
+
+            
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        item.style.maxHeight = null;
+                    });
+
+                    if (!isOpen) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+        });
+</script>
+  
+<script>
+    function loadIframe(page) {
+     
+        document.getElementById('content').src = page; 
+    }
+</script>
+<script>
+  const books = [
+  {
+      title: "It Starts With One",
+      author: " Jason Lipshutz",
+      price: 30.00,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/1.jpg",
+      details: " <del> $5.00 <del> "
+  },
+  {
+      title: "Twisted",
+      author: " Mclntire",
+      price: 7.49,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/4.webp",
+      details: " <del> $5.00 <del> "
+  },
+  {
+      title: "Spies in Disguise",
+      author: " Titan",
+      price: 10.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/7.jpeg",
+      details: " <del> $5.00 <del> "
+  },
+  {
+      title: "Turning Red",
+      author: " Chronicle",
+      price: 16.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/8.jpeg",
+      details: " <del> $5.00 <del> "
+  },
+  {
+      title: "The last bookstor on earth",
+      author: " Lily Braun-Arnold",
+      price: 10.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/2.webp",
+      details: " <del> $5.00 <del> "
+  },
+  {
+      title: "The Songbird and the Heart of Stone",
+      author: " Carissa Broadbent",
+      price: 26.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/5.webp",
+      details: " <del> $5.00 <del> "
+  },
+  {
+      title: "My Happy Marriage art Book",
+      author: " Rito Kohsaka,Akumi Agitogi",
+      price: 27.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/3.webp",
+      details: "<del> $5.00 <del>"
+  },
+  {
+      title: "Castles of the World",
+      author: " Jestice",
+      price: 15.00,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/فن/6.webp",
+      details: "<del> $5.00 <del>"
+  },
+ 
+  {
+      title: "Shopping for a Billonaire",
+      author: " julia kent",
+      price: 20.00,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/1.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Marketing",
+      author: "professor Dhruv Gerwal",
+      price: 0.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/2.webp",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Still Beats the Market",
+      author: "Joel Greenblatt,Andrew Tobias ",
+      price:28.00 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/3.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Marketing :An introduction ",
+      author: "Gary Armstrong",
+      price: 1.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/4.webp",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Marketing",
+      author: "William pride",
+      price: 3.33,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/5.webp",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The Desember Market",
+      author: "RaeAnne Thayne",
+      price: 18.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/6.webp",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Spanchi",
+      author: " paul Baines,<br>Chris Fill",
+      price:20.00 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/7.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Markets for Children's Writers",
+      author: "Marni McNiff",
+      price: 20.00,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تسويق/8.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Chanel",
+      author: " Daniele Bott,<br>Daniele Boot",
+      price: 32.55,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/1.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Elements of Style",
+      author: "Erin Gates,Erin T.Gates",
+      price:23.18 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/3.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Christian Dior",
+      author: "Megan Hess",
+      price: 22.04,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/4.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Chrisitan Dior",
+      author: "Oriole Cullen, Connie Karol Burks,",
+      price: 36.07,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/7.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Dior Catwalk",
+      author: "Alexander Fury,<br>Adelie Sabatini",
+      price:54.87 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/2.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Style :Beautiful Home",
+      author: "Natalie Walton",
+      price:31.93 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/5.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Monochrome Home",
+      author: "Hilaty Robertson",
+      price:22.70 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/6.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Made for Living",
+      author: "Amber Lewis,<br>Cat Chen",
+      price:17.64 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/تصميم/8.jpg",
+      details: "<del> $5.00 <del>"
+  },
+  {
+      title: "Yoga Your Home",
+      author: "Au,Sivananda Yoga",
+      price: 11.83,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/1.jpg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "The Spirit and practice",
+      author: "Schiffmann.Erich",
+      price:20.00 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/2.jpeg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "Anodea judith's Chakra Yoga",
+      author: "Anodea Judith,<br>Anodea,phD judith",
+      price: 24.97,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/3.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Light on Yoga",
+      author: "B K S lyengar,<br>B.K.S. lyengar,b.k.s.",
+      price: 19.39,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/4.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Yoga for children",
+      author: "Flynn,<br>Lisa paperback",
+      price: 7.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/5.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Celebarating the yogi in all of us",
+      author: "Hansen,Harmony Willow",
+      price: 5.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/6.jpeg",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  {
+      title: "Yoga Sequencing",
+      author: "Mark Stephens",
+      price: 17.64,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/7.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Mudras of Yoga",
+      author: "Cain Carroll,<br>Revital Carroll",
+      price:24.33 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/يوغا/8.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  
+  ,
+  {
+      title: "Two-Way Street",
+      author: "Lauren Barnholdt ",
+      price:10.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/3.jpg",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: "We Are Experiencing a Slight Delay",
+      author: "Janetti,Gary",
+      price: 8.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/7.jpeg",
+      details: "  <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "Travel Ephemera",
+      author: "Kate Curry  ",
+      price: 20.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/1.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: "Thirteen Reasons Way",
+      author: "Jay Asher",
+      price: 8.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/5.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " The Emperor Far Away",
+      author: "Eimer,David",
+      price: 6.49,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/11.jpeg",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: "by : Laurie Halse Anderson",
+      author: "Laurie Halse Anderson ",
+      price: 9.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/6.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: "The Guernsey Literary and Potato pell pie Society",
+      author: "Mary Ann Shaffer, Annie Barrows ",
+      price: 4.19,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/4.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: "Looking for Alaska",
+      author: "john Green ",
+      price: 8.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/2.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: "Budapest pocket travel guide",
+      author: "insight gudies",
+      price: 4.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/13.jpeg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " We do Not part:a novel",
+      author: "Han Kang, e.yaewon(translator)",
+      price: 25.00,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/15.webp",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " Wherever you go",
+      author: "Houghton,Daniel Hardcover",
+      price: 9.49 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/14.jpeg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " Question of Travel",
+      author: "de kretser,Michelle",
+      price: 6.49,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/8.jpeg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: "Travel Hacks ",
+      author: "Bradford,Keith paperback ",
+      price: 6.49,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/9.jpeg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: "Travel Mazes",
+      author: "Highlights press",
+      price:2.49  ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/12.jpeg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "Why we travel : 100 Reasons to see the world",
+      author: "Schultz,patricia",
+      price:8.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/سفر/10.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The Arm inside <br>the Billion",
+      author: "passan, Jeff",
+      price:8.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/1.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Much Ado About <br> Baseball",
+      author: "LaRocca, Rajani ",
+      price: 7.49 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/2.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The perfiction<br> point",
+      author: "Brenkus",
+      price:6.49 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/8.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The world's Fastest",
+      author: "Michael kranish ",
+      price: 7.50,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/14.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " Soccernomics",
+      author: "simon kuper",
+      price: 9.79,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/5.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Soccer ageinst",
+      author: "Simon",
+      price: 21.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/15.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The Formula",
+      author: "by : joshua robinson",
+      price:20.4  ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/7.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Mental Toughness",
+      author: "Troy Horne",
+      price: 15.25,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/3.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " Messi:From the <br> playground",
+      author: "tom oldfield ",
+      price:3.41 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/9.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "IB Diploma",
+      author: "john sproule ",
+      price: 32.57,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/10.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Blood Spoort",
+      author: " David",
+      price: 7.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/11.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " How to win",
+      author: "Mark cuban",
+      price:5.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/16.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Bar sport",
+      author: "Stefano Benni ",
+      price:3.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/13.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Surviving to Drive",
+      author: "Guenther steiner ",
+      price: 9.59 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/4.jpg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "The Supercar Book",
+      author: "Martin Roach",
+      price: 25.34,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/6.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The five Rings",
+      author: "thomas cleary",
+      price: 6.93 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/12.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Secrets of <br> Successful",
+      author: "Alwyn",
+      price: 30.13,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/17.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The champion's <br> Mind",
+      author: "jim craig ",
+      price:7.33 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/18.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "pele",
+      author: "Tom oldfield",
+      price: 3.41,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/رياضه/19.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+
+
+
+
+
+
+  
+  {
+      title: "The Cook's Book",
+      author: "McKoy, Bri",
+      price:12.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/1.jpeg",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  {
+      title: "Ferment",
+      author: "ingredient",
+      price: 34.65,
+      category: "أخري",
+      language: "Englsh",
+      condition: "أخغلاف ورقيري",
+      image: "./1/other/طبخ/2.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The Complete Cookbook",
+      author: "lindsay taylor",
+      price: 38.03,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/3.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "The Tucci cookbook",
+      author: "Russell Dawson",
+      price: 30.30,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/4.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The feed zone cookbook",
+      author: "Biju Thomas Allen lim",
+      price:4.18 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/5.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Alkaline vs Acidic Food",
+      author: "Russell Dawson",
+      price:15.55 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/6.jpg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "The sprouted kitchen bowl",
+      author: "Sara forte",
+      price: 4.01,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/7.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "An avocado a day",
+      author: "lara ferroni 8",
+      price:3.83 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/8.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "eat , pray ,love",
+      author: "Elizabet gilbert",
+      price: 3.64,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/9.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Creative food photography",
+      author: "Kimberly Espinel",
+      price: 29.30,
+      category: "other",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/10.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The food doula cookbook",
+      author: "lindsay taylor",
+      price: 4.75,
+      category: "other",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/11.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+
+  {
+      title: "The Complete Mediterranean",
+      author: "Cider Mill press",
+      price: 12.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/12.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The Glucose",
+      author: "Jessie lnchaus",
+      price: 16.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/13.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Preppy Kitchen",
+      author: "Kanell,John",
+      price: 12.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/14.jpeg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "Personal Recipe Book",
+      author: "Foodee Jane",
+      price: 14.77,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/15.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The Annotated Hobbit",
+      author: "Douglas A .Anderson",
+      price:35.00 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/16.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Food Network Magazine the Big",
+      author: "Food Network Magazine ,maile Carpenter",
+      price:13.14 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/17.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Big Book Of Organic Food",
+      author: " Stephanie Middleberg",
+      price: 15.78,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/18.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "The Complete Baking Book for Young Chefs",
+      author: "America's Test Kitchen Kids",
+      price:19.46 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/19.jpg",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  {
+      title: "The Food Mood Connection",
+      author: "Dr Dr Uma Naidoo",
+      price: 16.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/20.jpg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "My Early Learning Padded Book OF Food",
+      author: "Wonder House Books",
+      price: 3.99,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/21.jpg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "Ilove you recipes from the heart",
+      author: " Kristen Suzanne",
+      price:44.38 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/22.webp",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "In Defense of Food",
+      author: "Michael pollan",
+      price: 12.0,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/23.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Kristen Suzanne's Easy Raw ",
+      author: "Kristen Suzanne",
+      price:12.99 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/24.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "New Book of Middle Eastern Food",
+      author: " Claudia Roden",
+      price:44.70 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/25.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Wine Food",
+      author: "by : Dana Frank,Andrea Slonecker",
+      price: 12.03,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/26.jpg",
+      details: "<del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "Official Five Nights at Freddy's Cokbook",
+      author: "by : Rob Morris,Scott Cawthon",
+      price: 15.34,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/27.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Look inside Food",
+      author: "Benedetta Giaufret ,Enica Rusina,Emily Bone",
+      price:6.42 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/28.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "Bitterman's craft salt cooking",
+      author: "Mark Bitterman",
+      price:3.88 ,
+      category: "أخري",
+      language: "Englsh",
+      condition: "غلاف ورقي",
+      image: "./1/other/طبخ/30.jpeg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب التعليم قبل المدرسة",
+      author: "روضه",
+      price: 50.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/cheld/المنهج القومي.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب التعليم قبل المدرسة",
+      author: "روضه",
+      price: 50.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/cheld/التعيم قبل المدرسة.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب التربية الاسلامية",
+      author: "اولي ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/1/Screenshot_3.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "كتاب اللغة العربية",
+      author: "اولي ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/1/Screenshot_2.jpg",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "كتاب اللغة الانجليزية",
+      author: "اولي ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/1/Screenshot_1.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب الرياضيات",
+      author: " اولي ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/1/Screenshot_15.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب الاسلامية",
+      author: " ثاني ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/2/اسلامية.png",
+      details: " <del> $5.00 <del>"
+      }
+  ,
+  {
+      title: "كتاب الرياضيات",
+      author: "ثاني ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/2/رياضات.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة الانجليزية",
+      author: "ثاني ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/2/انجليزي.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب التربية الاسلامية",
+      author: "ثالث ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/3/Screenshot_4.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب الرياضيات",
+      author: "ثالث ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/3/Screenshot_2.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة العربة",
+      author: "ثالث ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/3/Screenshot_6.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة الانجليزية",
+      author: "ثالث ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/3/Screenshot_1.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة الانجليزية",
+      author: "ثالث ابتدائي",
+      price:36.3 ,
+      category: "",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/3/Screenshot_3.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب العلوم الطبيعية",
+      author: "ثالث ابتدائي",
+      price: 36.3,
+      category: "",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/3/Screenshot_8.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب العلوم",
+      author: "ثالث ابتدائي",
+      price: 36.3,
+      category: "",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/3/Screenshot_5.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب التاريخ",
+      author: "ثالث ابتدائي",
+      price:36.3 ,
+      category: "",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/3/Screenshot_7.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب القران الكريم",
+      author: "رابع ابتدائي",
+      price:36.3 ,
+      category: "",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/4/القران.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة العربيه",
+      author: "رابع ابتدائي",
+      price:36.3 ,
+      category: "",
+      language: "عربي",
+      condition: " غلاف ورقي",
+      image: "./1/school/4/عربي.jpg",
+      details: " <del> $5.00 <del>"
+      }
+  ,
+  {
+      title: "كتاب التربية الاسلامية",
+      author: "رابع ابتدائي",
+      price:36.3 ,
+      category: "",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/الاسلامية.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب الرياضيات",
+      author: "رابع ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/الرياضيات.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " كتاب التربية الفنية",
+      author: "رابع ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/فنون.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب العلوم الطبيعية ",
+      author: "رابع ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/العلوم.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " كتاب تكنولوجيا المعلومات والاتصالات",
+      author: "رابع ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/تكنولوجيا.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب التاريخ ",
+      author: "رابع ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/التاريخ.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " كتاب اللغة الانجليزية 1",
+      author: "رابع ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/انجليزي1.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة الانجليزية  ",
+      author: "رابع ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/انجليزي2.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة العربيه",
+      author: "خامس ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي",
+      image: "./1/school/5/العربية.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " كتاب تكنولوجيا المعلومات",
+      author: "خامس ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/5/تكنولوجيا.jpg",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب اللغة الانجليزيه ",
+      author: "خامس ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/5/انجليزي.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب التاريخ",
+      author: "خامس ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/5/التاريخ.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب التربيه الاسلاميه",
+      author: "خامس ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/5/الاسلامية.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب الرياضيات ",
+      author: "خامس ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/5/الرياضيات.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب التربيه الفنيه ",
+      author: "خامس ابتدائي",
+      price: 36.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/4/فنون.jpg",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب العلوم ",
+      author: "خامس ابتدائي",
+      price:36.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/5/العلوم.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب  اللغة الانجليزية",
+      author: "اولي متوسط ",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/final.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة العربية",
+      author: "اولي متوسط",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/العربية.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة الانجليزية",
+      author: "اولي متوسط",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/الانجليزي.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب الجغرافيا ",
+      author: "اولي متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/الجغرافيا.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب التاريخ",
+      author: "اولي متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/التاريخ.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب الاسلامية",
+      author: "اولي متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/التربية الاسلامية.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب الرياضيات ",
+      author: "اولي متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/الرياضيات.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب العلوم",
+      author: "اولي متوسط",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/العلوم الطبيعية.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب تكنولوجيا المعلومات",
+      author: "اولي متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/6/تكنولوجيا المعلومات والاتصالات.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب التربية الاسلامية",
+      author: "ثاني متوسط",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/اسلامية.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: "كتاب التاريخ ",
+      author: "ثاني متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/التاريخ.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب الجغرافيا  ",
+      author: "ثاني متوسط",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/جغرافيا.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب الرياضيات ",
+      author: "ثاني متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/الرياضيات.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب العلوم الطبعية",
+      author: "ثاني متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/العلوم الطبيعية.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب اساسيات التربية التقنية ",
+      author: "ثاني متوسط",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/اساسيات التربية التقنية.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة الانجليزية 1",
+      author: "ثاني متوسط",
+      price:39.3 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/انجليزي1.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة الانجليزية 2",
+      author: "ثاني متوسط",
+      price: 39.3,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/7/انجليزي2.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب اساسيات التربية التقنية",
+      author: "ثالث متوسط",
+      price: 39.4,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/التربية التقنية.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة الانجليزية",
+      author: "ثالث متوسط",
+      price:39.4 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/انجليزي.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب الاسلامية",
+      author: "ثالث متوسط",
+      price:39.4 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/اسلامية.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب الجغرافيا",
+      author: "ثالث متوسط",
+      price:39.4 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/الجغرافيا.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب الرياضيات",
+      author: "ثالث متوسط",
+      price: 39.4,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/الرياضيات.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب التاريخ ",
+      author: "ثالث متوسط",
+      price: 39.4,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/تاريخ.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب تكنولوجيا المعلومات والاتصالات ",
+      author: "ثالث متوسط",
+      price: 39.4,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/تكنولوجيا المعلومات والاتصالات.png",
+      details: "<del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة العربية",
+      author: "ثالث متوسط",
+      price: 39.4,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/العربية.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "كتاب اللعلوم ",
+      author: "ثالث متوسط",
+      price:39.4 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي ",
+      image: "./1/school/8/العلوم.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  {
+      title: " كتاب الاحياء ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "  غلاف ورقي",
+      image: "./1/school/thanoy/الاحياء.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: " كتاب  المطالعة و الادب ",
+      author: " اولي ثانوي",
+      price: 36.45,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/المطالعة والادب.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " كتاب البلاغة والتعبير< ",
+      author: " اولي ثانوي",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/البلاغة والتعبير.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: " كتاب التربية الاسلامية الخاصة ",
+      author: " اولي ثانوي",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./school/thanoy/التربية الاسلامية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " كتاب الرياضيات ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/الرياضيات.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: "  كتاب العلوم الاسرية",
+      author: " اولي ثانوي",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/العلوم الاسرية.png",
+      details: " <del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: "كتاب العلوم العسكرية  ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/العلوم العسكرية.png",
+      details: "<del> $5.00 <del>   "
+  }
+  ,
+  
+  {
+      title: "كتاب العلوم الهندسية  ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/اساسيات العلوم الهندسية.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: "كتاب الفنون والتصميم  ",
+      author: " اولي ثانوي",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/الفنون والتصميم.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: " كتاب القران ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/القران الكريم.png",
+      details: "  <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة الانجليزية ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي  ",
+      image: "./1/school/thanoy/اللغة الانجليزية.png",
+      details: " <del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: " كتاب اللغة الفرنسية ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/اللغة الفرنسية.png",
+      details: " <del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: " كتاب التاريخ ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/التاريخ.png",
+      details: " <del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: " كتاب الجغرافيا  ",
+      author: " اولي ثانوي",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/الجغرافيا.png",
+      details: " <del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: "  كتاب الفيزياء",
+      author: "اولي ثانوي  ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/الفيزياء.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: " كتاب الكيمياء ",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/الكيمياء.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: "كتاب قواعد النحو   ",
+      author: " اولي ثانوي",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/قواعد النحو.png",
+      details: " <del> $5.00 <del>"
+  }
+  ,
+  
+  {
+      title: "  كتاب علوم الحاسوب",
+      author: "اولي ثانوي ",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanoy/علوم الحاسوب.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  
+  {
+      title: " كتاب الدراسات الاسلامية ",
+      author: " اولي ثانوي",
+      price:36.45 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: "غلاف ورقي  ",
+      image: "./1/school/thanoy/الدراسات الاسلامية.png",
+      details: " <del> $5.00 <del>  "
+  }
+  ,
+  
+  {
+      title: " كتاب الاحياء",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الاحياؤ.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "كتاب الانتاج الزراعي والحيواني ",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الانتاج الزراعي والحيواني.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب البلاغة والتعبير",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/البلاغة والتعبير.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الدراسات الاسلامية ",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الدراسات الاسلامية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب  العلوم الاسرية ",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/العلوم الاسرية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب  العلوم التجارية",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/العلوم التجارية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب العلوم العسكرية",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/العلوم العسكرية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب  العلوم الهندسية",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/العلوم الهندسية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب الفنون والتصميم",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الفنون والتصميم.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب اللغة الانجليزية",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/اللغة الانجليزية.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: " كتاب  اللغة العربية",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/اللغة العربية الخاصة.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب اللغة الفرنسية ",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/اللغة الفرنسية.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: " كتاب المطالعة",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/المطالعة والادب.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب التاريخ  ",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/التاريخ.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب الجغرافيا ",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الجغرافيا.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب الرياضيات",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الرياضيات.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الفيزياء ",
+      author: "ثاني ثانوي  ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الفيزياء.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: " كتاب قواعد النحو",
+      author: " ثاني ثانوي ",
+      price: 38.11,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/قواعد النحو.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الكيمياء ",
+      author: " ثاني ثانوي ",
+      price:38.11 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/thanwe2/الكيمياء.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: "كتاب التربية الاسلامية ",
+      author: "ثالث ثانوي  ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/التربية الاسلامية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب  اللغة العربية الخاصة ",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/اللغة العربية الخاصة.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب  علوم الحاسوب",
+      author: "ثالث ثانوي  ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/علوم الحاسوب.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: "كتاب الدراسات الاسلاميه ",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/الدراسات الاسلاميه.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: " كتاب قواعد النحو",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/قواعد النحو.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: " كتاب الاحياء",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/احياء.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الانتاج الزراعي والحيواني ",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/الانتاج الزراعي.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: " كتاب التاريخ<",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/التاريخ.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: " كتاب  الرياضيات الاساسيه",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/الرياضيات الاساسيه.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الرياضيات المتخصصة ",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/رياضيات متخصصه 2.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "كتاب العلوم الاسريه ",
+      author: "  ثالث ثانوي",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/العلوم الاسريه.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,
+  {
+      title: "كتاب العلوم التجاريه",
+      author: "ثالث ثانوي  ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/العلوم لتجاريه.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,
+  {
+      title: "كتاب العلوم العسكريه",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/العلوم العسكرية.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب العلوم الهندسيه",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/العلوم الهندسيه.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الفنون",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/الفنون والتصميم.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الفيزياء",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/الفيزياء.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب الكيمياء",
+      author: "ثالث ثانوي  ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/الكيمياء.png",
+      details: "  <del> $5.00 <del>"
+  }
+  ,{
+      title: "كتاب المطالعة والادب",
+      author: "ثالث ثانوي  ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/المطالعه والادب.png",
+      details: "<del> $5.00 <del>  "
+  }
+  ,{
+      title: "كتاب اللغة الانجليزيه",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/اللغة الانجليزيه.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب البلاغة",
+      author: " ثالث ثانوي ",
+      price:37.54 ,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/بلاغه وتعبير.png",
+      details: " <del> $5.00 <del> "
+  }
+  ,{
+      title: "كتاب دراسات ادبية",
+      author: " ثالث ثانوي ",
+      price: 37.54,
+      category: "مدرسيه",
+      language: "عربي",
+      condition: " غلاف ورقي ",
+      image: "./1/school/tanawe3a/دراسات ادبيه ولغويه.png",
+      details: " <del> $5.00 <del>"
+  }
+ 
+  
+
+  
+ 
+];
+
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+const booksContainer = document.getElementById("books-container");
+
+searchButton.addEventListener("click", () => {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+
+  const results = books.filter(book => {
+      const matchesTitle = book.title.toLowerCase().includes(searchTerm);
+      const matchesAuthor = book.author.toLowerCase().includes(searchTerm);
+      const matchesCategory = book.category.toLowerCase().includes(searchTerm);
+      const matchesPrice = book.price.toString() === searchTerm;
+      const matchesLanguage = book.language.toLowerCase().includes(searchTerm);
+      const matchesCondition = book.condition.toLowerCase().includes(searchTerm);
+
+      return matchesTitle || matchesAuthor || matchesCategory || matchesPrice || matchesLanguage || matchesCondition;
+  });
+  displayResults(results);
+});
+
+function displayResults(results) {
+  booksContainer.innerHTML = "";
+  results.forEach(book => {
+      const bookHTML = `
+          <div class="book">
+              <img src="${book.image}" alt="${book.title}">
+              <h2>${book.title}</h2>
+              <p>🖋: ${book.author}</p>
+              <p>💰السعر: ${book.price} دولار</p>
+              <p>الفئة: ${book.category}</p>
+              <p>اللغة: ${book.language}</p>
+           
+            <p>نوعه: ${book.condition}</p>
+              <p> مستعمل${book.details}</p>
+          </div>
+      `;
+      booksContainer.insertAdjacentHTML("beforeend", bookHTML);
+  });
+}
+</script>
+</body>
+
+</html>

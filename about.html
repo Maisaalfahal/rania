@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meet Our Team 🗽 </title>
+  <style>
+    body {
+      
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #f0f0f0, #e0e0e0); 
+      color: rgb(247, 8, 139);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      margin-right: 30px;
+    }
+
+    .logo-text  {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      color: #007bff;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+    
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, #007bff, transparent);
+    
+    }
+
+
+    .content {
+      padding: 30px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(to bottom, #be096d, #03b61b);
+      
+      
+      
+      
+    }
+
+     h1 {
+       
+      color: #007bff;
+      text-align: center;
+      margin-bottom: 20px;
+      
+      
+     
+    }
+    
+   
+
+    .team-members {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    background: linear-gradient(to bottom, #2ed604, #eb09cd);
+    max-width: 100%; 
+    padding: 10px 0; 
+      
+      
+    }
+
+    .member { 
+      
+    width: 200px; 
+    height: 300px; 
+    margin: 10px; 
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s; 
+     
+      
+    }
+    .member:hover{
+      transform: translateY(-5px);
+      background: linear-gradient(to bottom, #4720a1, #10c20a);
+      box-shadow: 0 2px 4px rgb(0, 0, 0.1);
+      cursor: pointer;
+
+    }
+
+    .member img  {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      
+      
+    }
+    .member img:hover{
+      overflow: hidden;
+      transform: scale(1.1);
+    }
+    .member h2 {
+      margin-bottom: 5px;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); 
+      animation: glow 1s ease-in-out infinite alternate;
+
+     
+    }
+
+    .member p {
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); 
+     animation: glow 1s ease-in-out infinite alternate;
+
+    }
+    
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+}
+    .p{
+      color: #f50606;
+      
+    }
+    
+    .n{
+      margin-left: 120px;
+    
+    }
+    
+ #navbar{
+
+    justify-content:left;
+    align-items: center;
+
+
+}
+  #navbar img{
+    
+    width:200px;
+    margin-left:200px ;
+}
+   
+    .t{
+      width:60vh;
+     
+      border-radius: 90px;
+      margin-left: 100px;
+      animation: color-change 5s infinite;
+      
+      
+ 
+    }
+   
+    
+    .t.l{
+      
+      color: rgb(35, 224, 10);
+      margin-left: 170px;
+
+    }
+    
+.t h1, .t h3 {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); 
+  animation: color-change 5s infinite alternate; 
+}
+
+@keyframes color-change {
+  0% {
+    color: #007bff; 
+    text-shadow: 0 0 10px blue;
+  }
+  50% {
+    color: #ff0000; 
+    text-shadow: 0 0 10px red;
+  }
+  100% {
+    color: #00ff00;
+    text-shadow: 0 0 10px green;
+  }
+}
+
+    .footer {
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+      background: url('./1/about/./shapes-3d-4k-yj-3840x2400.jpg')center center/cover fixed ;
+    }
+     .footer p {
+      color: #333;
+    }
+    .d{
+      
+    display: flex;
+    justify-content:left;
+    align-items: center;
+    }
+   .d img{
+    margin-top: 5px;
+    margin-left: 650px;
+    width:200px;
+    border-radius: 6vh;
+
+    }
+   .r{
+    background: none;
+    color: #fff;
+    font-size: large;
+    cursor: pointer;
+    border:5px solid #06df2a;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    margin-left: 30px;
+    text-decoration:#03b61b;
+    font-style:italic;
+}
+ .r:hover{
+  background: linear-gradient(to bottom, #50db2d, #d31aab);
+  border:7px solid #df06a9;
+
+}
+.moving-text{
+  animation:moveText 2s infinite alternate;
+}
+@keyframes moveText {
+  0% {
+    transform:translateX(0);
+  }
+  100%{
+    transform: translateX(200px);}
+
+  }
+
+ .f{
+  background: linear-gradient(to bottom, #136e6a, #0a0a0a);
+  margin-left: 200px;
+  margin-right: 180px;
+  height: 20vh;
+
+ }
+
+
+#o{
+  color: #03b61b;
+}
+
+.j{
+  color: #d5d810;
+  
+}
+#o{
+  color:#d5d810 ;
+  position: sticky;
+  top: 0;
+}
+
+.qq{
+  color: red;
+}
+
+
+
+
+
+
+:root
+{
+	--black: #333;
+	--light-color: #cdaa7c;
+	--box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+}
+
+    #zzz{
+        
+        background: linear-gradient(to bottom, #be096d, #03b61b);
+        border-top-right-radius: 20px;
+    }
+    
+    .nodes {
+            text-align: center;
+            color: #fff;
+            
+        }
+
+        .review-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review h3 {
+            margin: 0;
+            color: #28a745;
+        }
+
+        .review p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-left:  6px solid #be096d;
+            border-radius: 4px;
+            border-bottom-left-radius: 20px;
+            
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            color: rgb(199, 31, 31);
+            font-style: italic;
+            font-size: 18px;
+            border:solid #b8cfcf ;
+            border-radius: 4px;
+            cursor: pointer;
+            border-bottom-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        button:hover {
+            background-color: #be096d;
+            color: #ddd;
+        }
+ 
+       
+
+    
+
+
+
+  
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo"> 
+      <div class="logo-text">academy</div>
+    </div>
+ 
+    <h1>Meet Our Team </h1>
+    <div class="t">
+       <pr>
+        
+         <h1 class="l">بسم الله الرحمان الرحيم</h1> 
+        
+        <br>
+        
+         <h3 class="n">اكاديمية العلوم الهندسية والطبية</h3> 
+       
+    </div>
+    <div id ="navbar">
+      <img src="./1/about/u.jpg" alt="food lover logo">
+    </div>
+       
+  </header>
+
+  <main class="content">
+    <div class="team-members">
+      
+      <div class="member">
+        <img src="./1/about/IMG_20241010_030938_688.jpg" alt="Member 1">
+        <h2 class="p"> لمياء حسين بشري عبد الكريم  </h2>
+        <p>Information Tichnology 5 (It) </p>
+        <h5><a href="mailto:lamiahussein75@gmail.com">lamiahussein75@gmail.com</a></h5>
+        🍂 📗
+        <br>
+      </div>
+      <div class="member">
+        <img src="  ./1/about/IMG_20241010_030938_748.jpg" alt="Member 3">
+        <h2 class="p"> دانية خضر محمد </h2>
+        <br>
+        <p>Information Tichnology 5 (It) </p>
+        <h5><a href="mailto:khidermohameddania@gmail.com" >khidermohameddania@gmail.com</a></h5>
+        🍂 📗
+        <br>
+      </div>
+      
+      <div class="member">
+        <img src="./1/about/IMG_20241010_030938_725.jpg" alt="Member 2">
+        <h2 class="p">رانيا محمد ميرغني الفحل  </h2>
+        <br>
+        <p> Information Tichnology 5 (It) </p>
+       <h5><a href="mailto:Raniaalfahal2r2@gmail.com">Raniaalfahal2r2@gmail.com</a></h5>
+       🍂 📗
+       <br>
+      </div>
+      <div class="member">
+        <img src="./1/about/IMG_20241010_030938_341.jpg" alt="Member 4">
+        <h2 class="p">حياة الفاضل عبدالله خميس </h2>
+        <p>Information Tichnology 5 (It) </p>
+        <h5><a href="mailto:hayatalfadil2112@gmail.com">Hayatalfadil2112@gmail.com</a></h5>
+        🍂 📗
+        <br>
+      </div>
+      <div class="member">
+        <img src="./1/about/IMG_20241010_030938_372.jpg" alt="Member 4">
+        <h2 class="p">الطيب عوض  الجيد فضل المولي </h2>
+        <p>Information Tichnology 5 (It) </p>
+        <h5><a href="mailto:Aleteuep2535@gmail.com">Aleteuep2535@gmail.com</a></h5>
+        🍂 📗
+        <br>
+      </div>
+    </div>
+  </main>
+
+
+
+
+  <section>
+    <div id="zzz">
+        <h1 class="nodes">آراء أوالتعليقات</h1>
+        <div class="review-container" id="reviewContainer">
+            <div class="review">
+                <h3>أحمد</h3>
+                <p>المكتبة رائعه، والخدمة ممتازة!</p>
+            </div>
+            <div class="review">
+                <h3>سارة</h3>
+                <p>أحببت المكتبة.</p>
+            </div>
+        </div>
+        <div class="form-container">
+            <h2 class="nodes">أضف رأيك</h2>
+            <form id="reviewForm" action="https://formspree.io/f/xgvolrko" method="POST">
+                <input type="text" id="name" name="name" placeholder="اسمك" required>
+                <textarea id="reviewText" name="reviewText" rows="4" placeholder="اكتب رأيك هنا..." required></textarea>
+                <button type="submit" id="submitReview">إرسال</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <footer class="footer">
+    
+    <h1 id="o" >   <span class="j"> <h2>   edraak websit 🖋 </h2>  **** </span> <span class="qq"> **** ****  </span>****   </h1>
+    <div class="f">
+   
+
+      <h1 class="moving-text"> 
+        📖_________ خدمة العملاء __________ 📕
+
+      </h1>
+      
+      <h2 style="background-color: rgb(15, 15, 15);display: inline;">  
+        "مرحبًا بك في مكتبة الكتب الإلكترونية، حيث تجتمع الثقافة والمعرفة في مكان واحد! تعد مكتبتنا مصدرك الموثوق للعديد من الكتب الرائعة في مجموعة متنوعة من المواضيع التي تلبي جميع اهتماماتك واحتياجاتك.
+        
+
+      <br>
+     * ولله الحمد *
+    </h2>
+    </div>
+    
+    
+    <div class="d">
+      <img src="./1/buyer/assets_12cbceb6be9648e2a8a23b8c10684f0b_e0079f42ff1f47adb80d6c794781f913.webp" alt="book " >
+      
+    </div>
+    <a href="index.html" class="r"> رجوع للمتجر </a>
+
+    <h1 id="o" > ****<span class="qq"> **** ****  </span>  <span class="j"> **** **** **** **** </span> <span class="qq"> **** ****  </span>****   </h1>
+    
+    
+  
+
+  <br>
+  <h1>Thank<span class="j"> You </span> <span id="o"> for</span>  FOLLowing Us </h1>
+   
+  
+                  
+ 
+  </footer>
+
+  <marquee direction="right"; bgcolor="rgb(255,0,0) " style="background-color: rgb(8, 8, 8); height: 30px; color: #2ed604 ;  font-size: larger; border-radius: 10px;margin-left: 50px; margin-right: 50px;"  >  استمتع بالقراءة في أي وقت وفي أي مكان ، عبر  متجرنا   مما يتيح لك  بيع وشرا الكتب . انضم الآن إلى عالم القراءة الرقمي    * </marquee>
+
+
+  <p style="margin-left: 90vh; color: #3f0dc9;  ">&copy; 2024 all right reserved 🔏</p>
+  <br>
+  
+  <script>
+    document.getElementById('reviewForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const formData = {
+            name: document.getElementById('name').value,
+            reviewText: document.getElementById('reviewText').value,
+        };
+
+    
+        fetch('https://formspree.io/f/xgvolrko', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (response.ok) {
+             
+                const reviewContainer = document.getElementById('reviewContainer');
+                const newReview = document.createElement('div');
+                newReview.classList.add('review');
+                newReview.innerHTML = `<h3>${formData.name}</h3><p>${formData.reviewText}</p>`;
+                reviewContainer.appendChild(newReview);
+
+             
+                document.getElementById('name').value = '';
+                document.getElementById('reviewText').value = '';
+                alert('تم إرسال رأيك بنجاح!');
+            } else {
+                alert('حدث خطأ أثناء إرسال الطلب');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('حدث خطأ أثناء إرسال الطلب');
+        });
+    });
+</script>
+</body>
+
+</html>
