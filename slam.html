@@ -7,8 +7,6 @@
     <title>Cash on Delivery</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -17,10 +15,10 @@
             outline: none;
             font-family: 'Poppins', sans-serif;
         }
-      
+
         body {
             background: #d6eef1;
-            background: url(./1/buyer/bg.jpg);
+            background: url(./buyer/bg.jpg);
             color: #333;
         }
 
@@ -30,15 +28,21 @@
             align-items: flex-start;
             min-height: 100vh;
             padding: 20px;
+            margin-top: 20px;
         }
 
         form {
             width: 100%;
-            max-width: 800px;
-            padding: 30px;
+            max-width: 700px;
+            padding: 15px;
             background: #fff;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        form:hover {
+            transform: scale(1.02);
         }
 
         .row {
@@ -55,17 +59,17 @@
         .title {
             font-size: 24px;
             color: #e53e3e;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 2px solid #e53e3e;
             padding-bottom: 5px;
         }
 
         .inputBox {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .inputBox label {
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             display: block;
             font-weight: 500;
         }
@@ -74,7 +78,7 @@
         .inputBox select {
             width: 100%;
             border: 1px solid #ccc;
-            padding: 12px;
+            padding: 10px;
             font-size: 16px;
             border-radius: 4px;
             transition: border-color 0.3s;
@@ -86,9 +90,14 @@
             box-shadow: 0 0 5px rgba(49, 130, 206, 0.5);
         }
 
+        .flex {
+            display: flex;
+            gap: 20px;
+        }
+
         .submit_btn {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             font-size: 18px;
             background: #2b6cb0;
             color: #fff;
@@ -108,83 +117,116 @@
                 flex-direction: column;
             }
         }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            background-color: white; 
+            padding: 10px;
+            border-radius: 5px;
+            color: #2b6cb0;
+            font-size: 18px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <form >
+        <form id="orderForm" action="https://formspree.io/f/xgvolrko" method="POST">
             <h3 class="title">Order Summary</h3>
             <div class="row">
 
                 <div class="col">
                     <h4 class="title">Book Information</h4>
-                    <img src="./1/buyer/assets_12cbceb6be9648e2a8a23b8c10684f0b_e0079f42ff1f47adb80d6c794781f913.webp" alt="credit/debit card image" height="80vh">
-               
+                    <img src="./buyer/assets_12cbceb6be9648e2a8a23b8c10684f0b_e0079f42ff1f47adb80d6c794781f913.webp" alt="Book Image" height="80vh">
+
                     <div class="inputBox">
                         <label for="bookName">Book Name:</label>
-                        <input type="text" id="bookName" placeholder="Enter book name" required>
+                        <input type="text" id="bookName" name="bookName" placeholder="Enter book name" required>
                     </div>
 
                     <div class="inputBox">
                         <label for="author">Author:</label>
-                        <input type="text" id="author" placeholder="Enter author's name" required>
+                        <input type="text" id="author" name="author" placeholder="Enter author's name" required>
                     </div>
 
                     <div class="inputBox">
                         <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" placeholder="Enter quantity" required>
-                    </div>
-                    
-                    <div class="inputBox">
-                        <label for="bookId">Book Quality:</label>
-                        <input type="text" id="bookId" placeholder="Enter book quality new or Vintage" required>
+                        <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required>
                     </div>
 
-
                     <div class="inputBox">
-                        <label for="bookId">Book ID:</label>
-                        <input type="text" id="bookId" placeholder="Enter book ID" required>
+                        <label for="bookQuality">Book Quality:</label>
+                        <select id="bookQuality" name="bookQuality" required>
+                            <option value="new">New</option>
+                            <option value="vintage">Vintage</option>
+                        </select>
                     </div>
+                    <div class="inputBox">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            <option value="">Select a Category (Optional)</option>
+                            <option value="academic">Academic</option>
+                            <option value="school">School</option>
+                            <option value="educational">Educational</option>
+                            <option value="religious">Religious</option>
+                            <option value="personal">Personal</option>
+                            <option value="electronic">Electronic</option>
+                            <option value="philosophical">Philosophical</option>
+                            <option value="literary">Literary</option>
+                            <option value="private">Private</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <label for="language">Language:</label>
+                        <select id="language" name="language" required>
+                            <option value="en">English</option>
+                            <option value="ar">Arabic</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="col">
                     <h4 class="title">Customer Information</h4>
-                    <img src="./1/buyer/IMG-20250209-WA0000.jpg" alt="credit/debit card image" height="80vh">
-               
+                    <img src="./buyer/IMG-20250209-WA0000.jpg" alt="Customer Image" height="80vh">
+
                     <div class="inputBox">
                         <label for="name">Full Name:</label>
-                        <input type="text" id="name" placeholder="Enter your full name" required>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                     </div>
 
                     <div class="inputBox">
                         <label for="email">Email:</label>
                         <input type="email" name="email" id="email" placeholder="Enter email address" required>
                     </div>
-                    <input type="hidden" name="_subject" value="New submission!">
+
                     <div class="inputBox">
-                        <label for="number">Number</label>
-                        <input type="text" id="text" placeholder="Enter your number" required>
+                        <label for="number">Number:</label>
+                        <input type="text" id="number" name="number" placeholder="Enter your number" required>
                     </div>
 
                     <div class="inputBox">
                         <label for="address">Address:</label>
-                        <input type="text" id="address" placeholder="Enter address" required>
+                        <input type="text" id="address" name="address" placeholder="Enter address" required>
                     </div>
 
                     <div class="inputBox">
                         <label for="city">City:</label>
-                        <input type="text" id="city" placeholder="Enter city" required>
+                        <input type="text" id="city" name="city" placeholder="Enter city" required>
                     </div>
 
                     <div class="inputBox">
                         <label for="zip">Zip Code:</label>
-                        <input type="text" id="zip" placeholder="123 456" required>
+                        <input type="text" id="zip" name="zip" placeholder="123 456" required>
                     </div>
                 </div>
             </div>
 
             <button type="submit" class="submit_btn">Confirm Order</button>
+            <div class="message" id="successMessage">تم إرسال طلبك بنجاح!</div>
         </form>
     </div>
 </body>
