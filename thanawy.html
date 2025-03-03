@@ -1,662 +1,321 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة تنزيل الكتب</title>
+    <title>Cash on Delivery</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        * {
             margin: 0;
-            padding: 20px;
-
-
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
         }
 
-        h1 {
-            text-align: center;
+        body {
+            background: #d6eef1;
+            background: url(./buyer/bg.jpg);
             color: #333;
-     
-        }
-
-        .section {
-            margin: 40px 0;
-            padding: 20px;
-            border-radius: 5px;
-            background-color: #e9ecef;
         }
 
         .container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            border-right: solid 7px rgb(226, 230, 19) ;
-            border-bottom-right-radius: 7px;
-        }   
-    .scroll-container {
-    overflow-x: auto; 
-    white-space: nowrap; 
-    padding: 10px 0; 
-    scroll-behavior: smooth; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        .book {
-            display: inline-block;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        form {
+            width: 100%;
+            max-width: 700px;
             padding: 15px;
-            width: 200px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            min-width: 200px; 
-            margin-right: 15px; 
-            border-radius: 5px; 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-        }
-        .book:hover {
-            transform: translateY(-5px); 
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2); 
+            background: #fff;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s;
         }
 
-        .book img {
-            max-width: 100%;
-            border-radius: 5px;
-    
-
-        }
-        
-        .book:hover img {
-            transform: scale(1.05); 
+        form:hover {
+            transform: scale(1.02);
         }
 
-        .download-btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #11d9e0;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .download-btn:hover {
-            background-color: #cc1e98;
-            color: #fff;
-            font-style: italic;
-            font: bold;
-        }
-
-
-
-        
-    .footer {
-    background: linear-gradient(90deg, #4A90E2, #50E3C2);
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-}
-
-
-
-
-
-
-.header {
+        .row {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .header img {
-            max-width: 50px; 
-            animation: logoAnimation 4s infinite; 
+        .col {
+            flex: 1 1 250px;
+            min-width: 300px;
         }
 
-        .header h1 {
-            margin: 0;
+        .title {
             font-size: 24px;
-            color: #333;
-            animation: colorChange 4s infinite; 
+            color: #e53e3e;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e53e3e;
+            padding-bottom: 5px;
         }
 
-        @keyframes logoAnimation {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1.5); }
-            75% { transform: scale(1.2); }
+        .inputBox {
+            margin-bottom: 15px;
         }
 
-        @keyframes colorChange {
-            0% { color: #333; }
-            25% { color: #e011a2; }
-            50% { color: #19c0dd; }
-            75% { color: #dd10bb; }
-            100% { color: #333; }
+        .inputBox label {
+            margin-bottom: 5px;
+            display: block;
+            font-weight: 500;
         }
 
-
-
-
-
-/**/
-
-
-
-
-.navbar {
-            display: flex;
-            justify-content: flex-start; 
-            position: sticky;
-            align-items: center;
-            background:#ffffffa4; 
-            color: white;
-            padding: 15px 20px; 
-            z-index: 1000; 
-            margin-left: 350px;
-            margin-right: 400px;
-            border-top: 5px solid #ff6347; 
-            border-right: 5px solid #6a5acd; 
-            border-bottom: 5px solid #20b2aa; 
-            border-left: 5px solid #ff69b4; 
-            border-radius: 10px; 
-            height: 4vh;
-}
-
-        .nav-list {
-            display: flex;
-            list-style: none;
-            direction: rtl; 
-        }
-
-        .nav-list li {
-            margin-left: 45px; 
-            position: relative; 
-        }
-
-        .nav-list li a {
-            font-size: 18px;
-            text-decoration: none;
-            color: rgb(219, 16, 175);
+        .inputBox input,
+        .inputBox select {
+            width: 100%;
+            border: 1px solid #ccc;
             padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: border-color 0.3s;
         }
 
-        .nav-list li a:hover {
-            color: yellow;
-            background: rgba(128, 128, 128, 0.479);
+        .inputBox input:focus,
+        .inputBox select:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 5px rgba(49, 130, 206, 0.5);
         }
-      
-      .hamburger {
-            display: none;
-            flex-direction: column;
+
+        .flex {
+            display: flex;
+            gap: 20px;
+        }
+
+        .submit_btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            background: #2b6cb0;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
         }
 
-        .bar {
-            height: 3px;
-            width: 25px;
-            background: rgb(219, 16, 175);
-            margin: 4px 0;
-            transition: 0.4s;
+        .submit_btn:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
         }
 
         @media (max-width: 768px) {
-            .nav-list {
-                display: none;
+            .row {
                 flex-direction: column;
-                position: absolute;
-                background: #ffffffa4;
-                width: 100%;
-                left: 0;
-                top: 60px;
-                padding: 10px;
-                border-radius: 10px;
-                
             }
-            .navbar{
-             margin: 0;
-             border: none;
-          
-            }
-            
-           
-
-            .nav-list.active {
-                display: flex;
-                text-align: left;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-            .nav-list li a {
-            font-size: 20px;
-            color: rgb(219, 16, 175);
-          
-        
-
-        
         }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            background-color: white; 
+            padding: 10px;
+            border-radius: 5px;
+            color: #2b6cb0;
+            font-size: 18px;
+            text-align: center;
         }
-    
+        .inputBoxxx .ra {
+            border-left: 3px solid red; /* إضافة border-left */
+            padding-left: 10px; /* إضافة مسافة داخلية */
+        }
 
+        .payment-accounts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
+        .payment-accounts div {
+            flex: 1;
+        }
     </style>
 </head>
+
 <body>
+    <div class="container">
+        <form id="orderForm" action="https://formspree.io/f/xgvolrko" method="POST">
+            <h3 class="title">Order Summary</h3>
+            <div class="row">
 
+                <div class="col">
+                    <h4 class="title">Book Information</h4>
+                    <img src="./buyer/assets_12cbceb6be9648e2a8a23b8c10684f0b_e0079f42ff1f47adb80d6c794781f913.webp" alt="Book Image" height="80vh">
 
-    <div class="header">
-        <img src="./home/rania.jpeg"  style="border-radius: 10vh;"  alt="شعار">
-        <h1>      ( انما يخشي الله من عباده العلماء)</h1>
-        <h1>اسمك هنا</h1>
-    </div>
+                    <div class="inputBox">
+                        <label for="bookName">Book Name:</label>
+                        <input type="text" id="bookName" name="bookName" placeholder="Enter book name" required>
+                    </div>
 
-    
-    <nav class="navbar">
-        <div class="hamburger" id="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <ul class="nav-list" id="navList">
-            <li><a href="rw2.html">روضه</a></li>
-            <li><a href="ept.html">ابتدائى</a></li>
-            <li><a href="mtwset.html">متوسط </a></li>
-            <li><a href="thanawy.html">ثانوي</a></li>
-            <li><a href="#contact">الرئيسيه</a></li>
-        </ul>
-    </nav>
+                    <div class="inputBox">
+                        <label for="author">Author's Name:</label>
+                        <input type="text" id="author" name="author" placeholder="Enter author's name" required>
+                    </div>
 
-    <h1>كتب الصف الأول<span style="color: #21c021;">  ثانوي</span></h1>
-    <div class="section">
-        <div class="container">
-            <div class="scroll-container">
-            <div class="book">
-                <img src="./1/school/thanoy/الاحياء.png" alt="كتاب 1">
-                <h3>كتاب الاحياء </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/المطالعة والادب.png" alt="كتاب 2">
-                <h3>كتاب  المطالعة و الادب</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/البلاغة والتعبير.png" alt="كتاب 3">
-                <h3>كتاب البلاغة والتعبير</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/التربية الاسلامية.png" alt="كتاب 4">
-                <h3>كتاب التربية الاسلامية الخاصة</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/الرياضيات.png" alt="كتاب 1">
-                <h3>كتاب الرياضيات </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/العلوم الاسرية.png" alt="كتاب 2">
-                <h3>كتاب العلوم الاسرية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/العلوم العسكرية.png" alt="كتاب 3">
-                <h3>كتاب العلوم العسكرية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/اساسيات العلوم الهندسية.png" alt="كتاب 4">
-                <h3>كتاب العلوم الهندسية</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
+                    <div class="inputBox">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required>
+                    </div>
 
-            <div class="book">
-                <img src="./1/school/thanoy/الفنون والتصميم.png" alt="كتاب 4">
-                <h3>كتاب الفنون والتصميم</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/القران الكريم.png" alt="كتاب 4">
-                <h3>كتاب القران</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/اللغة الانجليزية.png" alt="كتاب 4">
-                <h3>كتاب اللغة الانجليزية</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/اللغة الفرنسية.png" alt="كتاب 1">
-                <h3>كتاب اللغة الفرنسية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/التاريخ.png" alt="كتاب 1">
-                <h3>كتاب التاريخ </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/الجغرافيا.png" alt="كتاب 1">
-                <h3>كتاب الجغرافيا </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanoy/الفيزياء.png" alt="كتاب 1">
-                <h3>كتاب الفيزياء </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-         
-                <div class="book">
-                    <img src="./1/school/thanoy/الكيمياء.png" alt="كتاب 1">
-                    <h3>كتاب الكيمياء </h3>
-                    <a href="./buyer.html" class="download-btn"> شراء</a>
+                    <div class="inputBox">
+                        <label for="bookQuality">Book Quality:</label>
+                        <select id="bookQuality" name="bookQuality" required>
+                            <option value="new">New</option>
+                            <option value="vintage">Vintage</option>
+                        </select>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            <option value="">Select a Category (Optional)</option>
+                            <option value="academic">Academic</option>
+                            <option value="school">School</option>
+                            <option value="educational">Educational</option>
+                            <option value="religious">Religious</option>
+                            <option value="personal">Personal</option>
+                            <option value="electronic">Electronic</option>
+                            <option value="philosophical">Philosophical</option>
+                            <option value="literary">Literary</option>
+                            <option value="private">Private</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="language">Language:</label>
+                        <select id="language" name="language" required>
+                            <option value="en">English</option>
+                            <option value="ar">Arabic</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="book">
-                    <img src="./1/school/thanoy/قواعد النحو.png" alt="كتاب 1">
-                    <h3>كتاب قواعد النحو </h3>
-                    <a href="./buyer.html" class="download-btn"> شراء</a>
+
+                <div class="col">
+                    <h4 class="title">Customer Information</h4>
+                    <img src="./buyer/IMG-20250209-WA0000.jpg" alt="Customer Image" height="80vh">
+
+                    <div class="inputBox">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="email">Email Address:</label>
+                        <input type="email" name="email" id="email" placeholder="Enter email address" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="number">Phone Number:</label>
+                        <input type="text" id="number" name="number" placeholder="Enter your number" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" placeholder="Enter address" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city" placeholder="Enter city" required>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="zip">ZIP Code:</label>
+                        <input type="text" id="zip" name="zip" placeholder="123 456" required>
+                    </div>
                 </div>
-                <div class="book">
-                    <img src="./1/school/thanoy/علوم الحاسوب.png" alt="كتاب 1">
-                    <h3>كتاب علوم الحاسوب </h3>
-                    <a href="./buyer.html" class="download-btn"> شراء</a>
+            </div>
+
+            <div class="col">
+                <h3 class="title">Payment</h3>
+
+                <div class="payment-accounts">
+                    <div class="inputBoxxx">
+                        <img src="./buyer/a45834997dcd4a0c032c542bc4750c2b.jpg" alt="credit/debit card image" height="80px">
+                        <br>
+                        <label for="accountNum" class="ra">Account Book Number:</label>
+                        <h2>0127194084</h2>
+                    </div>
+                    <div class="inputBoxxx">
+                        <img src="./buyer/FB_IMG_17388341177309072.jpg" alt="credit/debit card image" height="80px">
+                        <br>
+                        <label for="accountNum" class="ra">Account Cash Number:</label>
+                        <h2>0127194084</h2>
+                    </div>
                 </div>
-                <div class="book">
-                    <img src="./1/school/thanoy/الدراسات الاسلامية.png" alt="كتاب 1">
-                    <h3>كتاب الدراسات الاسلامية </h3>
-                    <a href="./buyer.html" class="download-btn"> شراء</a>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <label for="expMonth">Exp Month:</label>
+                        <select id="expMonth" name="expMonth" required>
+                            <option value="">Choose month</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="expYear">Exp Year:</label>
+                        <select id="expYear" name="expYear" required>
+                            <option value="2025">2025</option>
+                        </select>
+                    </div>
+
+                    <div class="inputBox">
+                        <label for="expToday">Exp Today:</label>
+                        <select id="expToday" name="expToday" required>
+                            <option value="">Choose Today</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
                 </div>
-          
-        </div>
-        <h2>$36.45</h2>
+
+                <div class="inputBox">
+                    <label for="paymentImage">Attach Payment Image (Optional):</label>
+                    <input type="file" id="paymentImage" name="paymentImage" accept="image/*">
+                </div>
+            </div>
+
+            <button type="submit" class="submit_btn">Confirm Order</button>
+            <div class="message" id="successMessage">تم إرسال طلبك بنجاح!</div>
+        </form>
     </div>
-
-</div>
-
-
-
-
-    
-    <h1>كتب الصف الثاني<span style="color: #882172;">  ثانوي</span></h1>
-    <div class="section">
-        <div class="container">
-            <div class="scroll-container">
-            <div class="book">
-                <img src="./1/school/thanwe2/الاحياؤ.png" alt="كتاب 1">
-                <h3>كتاب الاحياء </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/الانتاج الزراعي والحيواني.png" alt="كتاب 1">
-                <h3>كتاب الانتاج الزراعي والحيواني </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/البلاغة والتعبير.png" alt="كتاب 1">
-                <h3>كتاب البلاغة والتعبير</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/الدراسات الاسلامية.png" alt="كتاب 1">
-                <h3>كتاب الدراسات الاسلامية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/العلوم الاسرية.png" alt="كتاب 1">
-                <h3>كتاب  العلوم الاسرية</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/العلوم التجارية.png" alt="كتاب 1">
-                <h3>كتاب  العلوم التجارية</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/العلوم العسكرية.png" alt="كتاب 1">
-                <h3>كتاب العلوم العسكرية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/العلوم الهندسية.png" alt="كتاب 1">
-                <h3>كتاب  العلوم الهندسية</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/الفنون والتصميم.png" alt="كتاب 1">
-                <h3>كتاب الفنون والتصميم </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/اللغة الانجليزية.png" alt="كتاب 1">
-                <h3>كتاب اللغة الانجليزية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/اللغة العربية الخاصة.png" alt="كتاب 1">
-                <h3>كتاب  اللغة العربية</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/اللغة الفرنسية.png" alt="كتاب 1">
-                <h3>كتاب اللغة الفرنسية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/المطالعة والادب.png" alt="كتاب 1">
-                <h3>كتاب المطالعة </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/التاريخ.png" alt="كتاب 1">
-                <h3>كتاب التاريخ </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/الجغرافيا.png" alt="كتاب 1">
-                <h3>كتاب الجغرافيا </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-           
-            <div class="book">
-                <img src="./1/school/thanwe2/الرياضيات.png" alt="كتاب 1">
-                <h3>كتاب الرياضيات </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/الفيزياء.png" alt="كتاب 1">
-                <h3>كتاب الفيزياء </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/قواعد النحو.png" alt="كتاب 1">
-                <h3>كتاب قواعد النحو </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/thanwe2/الكيمياء.png" alt="كتاب 1">
-                <h3>كتاب الكيمياء </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-          
-        </div>
-        <h2>$38.11</h2>
-    </div>
-
-</div>
-
-
-    
-    <h1>كتب الصف الثالث<span style="color: #a4cc12;">  ثانوي </span></h1>
-    <div class="section">
-        <div class="container">
-            <div class="scroll-container">
-            <div class="book">
-                <img src="./1/school/tanawe3a/التربية الاسلامية.png" alt="كتاب 1">
-                <h3>كتاب التربية الاسلامية </h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            <div class="book">
-                <img src="./1/school/tanawe3a/اللغة العربية الخاصة.png" alt="كتاب 3">
-                <h3>كتاب  اللغة العربية الخاصة</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/علوم الحاسوب.png" alt="كتاب 4">
-                <h3>كتاب  علوم الحاسوب</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/الدراسات الاسلاميه.png" alt="كتاب 4">
-                <h3>كتاب الدراسات الاسلاميه</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/قواعد النحو.png" alt="كتاب 4">
-                <h3>كتاب قواعد النحو</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/احياء.png" alt="كتاب 4">
-                <h3>كتاب الاحياء</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/الانتاج الزراعي.png" alt="كتاب 4">
-                <h3>كتاب الانتاج الزراعي والحيواني</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/التاريخ.png" alt="كتاب 4">
-                <h3>كتاب التاريخ</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-        
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/الرياضيات الاساسيه.png" alt="كتاب 4">
-                <h3>كتاب  الرياضيات الاساسيه</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-        
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/رياضيات متخصصه 2.png" alt="كتاب 4">
-                <h3>كتاب الرياضيات المتخصصة</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-        
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/العلوم الاسريه.png" alt="كتاب 4">
-                <h3>كتاب العلوم الاسريه</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-        
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/العلوم لتجاريه.png" alt="كتاب 4">
-                <h3>كتاب العلوم التجاريه</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/العلوم العسكرية.png" alt="كتاب 4">
-                <h3>كتاب العلوم العسكريه</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-        
-            <div class="book">
-                <img src="./1/school/tanawe3a/العلوم الهندسيه.png" alt="كتاب 4">
-                <h3>كتاب العلوم الهندسيه</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/الفنون والتصميم.png" alt="كتاب 4">
-                <h3>كتاب الفنون</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/الفيزياء.png" alt="كتاب 4">
-                <h3>كتاب الفيزياء</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/الكيمياء.png" alt="كتاب 4">
-                <h3>كتاب الكيمياء</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/المطالعه والادب.png" alt="كتاب 4">
-                <h3>كتاب المطالعة والادب</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/اللغة الانجليزيه.png" alt="كتاب 4">
-                <h3>كتاب اللغة الانجليزيه</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/بلاغه وتعبير.png" alt="كتاب 4">
-                <h3>كتاب البلاغة</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-            <div class="book">
-                <img src="./1/school/tanawe3a/دراسات ادبيه ولغويه.png" alt="كتاب 4">
-                <h3>كتاب دراسات ادبية</h3>
-                <a href="./buyer.html" class="download-btn"> شراء</a>
-            </div>
-            
-        </div>
-     <h2>   $37.54</h2>
-    </div>
-</div>
-
-
-
-
-
-
-    <div class="footer">
-        <p>مرحبًا بكم في منصتنا ادراك</p>
-        <p>تواصل معنا عبر البريد الإلكتروني: edrak@gmail.com</p>
-    </div>
-    <script>
-        const hamburger = document.getElementById("hamburger");
-        const navList = document.getElementById("navList");
-
-        hamburger.addEventListener("click", () => {
-            navList.classList.toggle("active");
-        });
-    </script>
-
 </body>
-    
+
 </html>
